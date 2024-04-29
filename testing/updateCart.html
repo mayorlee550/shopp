@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart Notification</title>
+<style>
+  /* CSS for styling */
+  .cart-icon {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Increased size */
+    height: 50px; /* Increased size */
+    background-color: #ddd;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px; /* Centering content */
+    font-size: 24px; /* Increased size */
+    cursor: pointer; /* Add cursor pointer */
+  }
+  .notification {
+    position: absolute;
+    top: -10px; /* Adjusted position */
+    right: -10px; /* Adjusted position */
+    background-color: red;
+    color: white;
+    width: 30px; /* Adjusted size */
+    height: 30px; /* Adjusted size */
+    border-radius: 50%;
+    font-size: 18px; /* Adjusted size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- HTML for cart icon with notification -->
+<div class="cart-icon" id="cartIcon" onclick="viewCart()">
+  <span class="notification" id="notificationCount">0</span>
+  🛒
+</div>
+
+<!-- Button to simulate adding an item to cart -->
+<button onclick="addToCart()">Add to Cart</button>
+
+<!-- Button to simulate removing an item from cart -->
+<button onclick="removeFromCart()">Remove from Cart</button>
+
+<script>
+  // JavaScript function to add item to cart and update notification count
+  function addToCart() {
+    var notificationElement = document.getElementById('notificationCount');
+    var currentCount = parseInt(notificationElement.textContent);
+    notificationElement.textContent = currentCount + 1;
+    updateCartDetails(currentCount + 1);
+  }
+
+  // JavaScript function to remove item from cart and update notification count
+  function removeFromCart() {
+    var notificationElement = document.getElementById('notificationCount');
+    var currentCount = parseInt(notificationElement.textContent);
+    // Ensure count doesn't go below 0
+    if (currentCount > 0) {
+      notificationElement.textContent = currentCount - 1;
+      updateCartDetails(currentCount - 1);
+    }
+  }
+
+  // Function to update cart details in localStorage
+  function updateCartDetails(count) {
+    localStorage.setItem('cartCount', count);
+  }
+
+  // Function to navigate to another page to view cart details
+  function viewCart() {
+    window.location.href = 'viewcart.html';
+  }
+</script>
+
+</body>
+</html>
